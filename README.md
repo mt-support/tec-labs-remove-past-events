@@ -35,16 +35,16 @@ If you have modifications you would like to suggest to our base template, here i
 
 By default, all of these variables will be replaced by the create method from the slack bot, but if you are creating your extension manually you will need to find/replace on all of the below.
 
-* `__TRIBE_BASE__` - "The Events Calendar" or "Event Tickets"
-* `__TRIBE_NAME__` - Plugin Human-readable name, e.g. "Sample Extension"
-* `__TRIBE_NAMESPACE__` - Which namespace we will use for the plugin. Usually the plugin name or the slug in uppercase without spaces, e.g. "SampleExtension"
-* `__TRIBE_SLUG__` - Uses using dashes normally, e.g. "sample-extension"
+* `The Events Calendar` - "The Events Calendar" or "Event Tickets"
+* `Remove Past Events Plus` - Plugin Human-readable name, e.g. "Sample Extension"
+* `Remove_Past_Events_Plus` - Which namespace we will use for the plugin. Usually the plugin name or the slug in uppercase without spaces, e.g. "SampleExtension"
+* `remove-past-events-plus` - Uses using dashes normally, e.g. "sample-extension"
 * `__TRIBE_DOMAIN__` - Translation domain normally with "tribe-" prefix, e.g. "tec-labs-sample-extension"
-* `__TRIBE_SLUG_CLEAN__` - Uses underscores, so it's safe for variables, e.g. "sample_extension"
+* `remove_past_events_plus` - Uses underscores, so it's safe for variables, e.g. "sample_extension"
 * `__TRIBE_SLUG_CLEAN_ALLCAPS__` - All-caps of clean slug, e.g. "SAMPLE_EXTENSION"
-* `__TRIBE_URL__` - The URL of the extension page, by default empty. Usually "https://theeventscalendar.com/extensions/sample-extension/"
-* `__TRIBE_VERSION__` - Version number of the extension, by default empty. Follows the "1.0.0" format
-* `__TRIBE_DESCRIPTION__` - The description of the extension, by default empty.
+* `` - The URL of the extension page, by default empty. Usually "https://theeventscalendar.com/extensions/sample-extension/"
+* `1.0.0` - Version number of the extension, by default empty. Follows the "1.0.0" format
+* `` - The description of the extension, by default empty.
 
 #### Slack Bot commands related to Extensions
 

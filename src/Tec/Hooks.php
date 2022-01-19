@@ -4,42 +4,42 @@
  *
  * To remove a filter:
  * ```php
- *  remove_filter( 'some_filter', [ tribe( Tribe\Extensions\__TRIBE_NAMESPACE__\Hooks::class ), 'some_filtering_method' ] );
- *  remove_filter( 'some_filter', [ tribe( 'extension.__TRIBE_SLUG_CLEAN__.hooks' ), 'some_filtering_method' ] );
+ *  remove_filter( 'some_filter', [ tribe( Tribe\Extensions\Remove_Past_Events_Plus\Hooks::class ), 'some_filtering_method' ] );
+ *  remove_filter( 'some_filter', [ tribe( 'extension.remove_past_events_plus.hooks' ), 'some_filtering_method' ] );
  * ```
  *
  * To remove an action:
  * ```php
- *  remove_action( 'some_action', [ tribe( Tribe\Extensions\__TRIBE_NAMESPACE__\Hooks::class ), 'some_method' ] );
- *  remove_action( 'some_action', [ tribe( 'extension.__TRIBE_SLUG_CLEAN__.hooks' ), 'some_method' ] );
+ *  remove_action( 'some_action', [ tribe( Tribe\Extensions\Remove_Past_Events_Plus\Hooks::class ), 'some_method' ] );
+ *  remove_action( 'some_action', [ tribe( 'extension.remove_past_events_plus.hooks' ), 'some_method' ] );
  * ```
  *
- * @since __TRIBE_VERSION__
+ * @since 1.0.0
  *
- * @package Tribe\Extensions\__TRIBE_NAMESPACE__;
+ * @package Tribe\Extensions\Remove_Past_Events_Plus;
  */
 
-namespace Tribe\Extensions\__TRIBE_NAMESPACE__;
+namespace Tribe\Extensions\Remove_Past_Events_Plus;
 
 use Tribe__Main as Common;
 
 /**
  * Class Hooks.
  *
- * @since __TRIBE_VERSION__
+ * @since 1.0.0
  *
- * @package Tribe\Extensions\__TRIBE_NAMESPACE__;
+ * @package Tribe\Extensions\Remove_Past_Events_Plus;
  */
 class Hooks extends \tad_DI52_ServiceProvider {
 
 	/**
 	 * Binds and sets up implementations.
 	 *
-	 * @since __TRIBE_VERSION__
+	 * @since 1.0.0
 	 */
 	public function register() {
 		$this->container->singleton( static::class, $this );
-		$this->container->singleton( 'extension.__TRIBE_SLUG_CLEAN__.hooks', $this );
+		$this->container->singleton( 'extension.remove_past_events_plus.hooks', $this );
 
 		$this->add_actions();
 		$this->add_filters();
@@ -48,7 +48,7 @@ class Hooks extends \tad_DI52_ServiceProvider {
 	/**
 	 * Adds the actions required by the plugin.
 	 *
-	 * @since __TRIBE_VERSION__
+	 * @since 1.0.0
 	 */
 	protected function add_actions() {
 		add_action( 'tribe_load_text_domains', [ $this, 'load_text_domains' ] );
@@ -57,7 +57,7 @@ class Hooks extends \tad_DI52_ServiceProvider {
 	/**
 	 * Adds the filters required by the plugin.
 	 *
-	 * @since __TRIBE_VERSION__
+	 * @since 1.0.0
 	 */
 	protected function add_filters() {
 
@@ -66,7 +66,7 @@ class Hooks extends \tad_DI52_ServiceProvider {
 	/**
 	 * Load text domain for localization of the plugin.
 	 *
-	 * @since __TRIBE_VERSION__
+	 * @since 1.0.0
 	 */
 	public function load_text_domains() {
 		$mopath = tribe( Plugin::class )->plugin_dir . 'lang/';
