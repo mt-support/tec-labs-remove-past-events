@@ -70,7 +70,7 @@ class Hooks extends \tad_DI52_ServiceProvider {
 	 */
 	public function load_text_domains() {
 		$mopath = tribe( Plugin::class )->plugin_dir . 'lang/';
-		$domain = '__TRIBE_DOMAIN__';
+		$domain = 'tec-labs-remove-past-events-plus';
 
 		// This will load `wp-content/languages/plugins` files first.
 		Common::instance()->load_text_domain( $domain, $mopath );

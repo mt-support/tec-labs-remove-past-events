@@ -3,13 +3,13 @@
  * Plugin Name:       The Events Calendar Extension: Remove Past Events Plus
  * Plugin URI:        
  * GitHub Plugin URI: https://github.com/mt-support/tec-labs-remove-past-events-plus
- * Description:       
+ * Description:       More times to remove past events.
  * Version:           1.0.0
  * Author:            The Events Calendar
  * Author URI:        https://evnt.is/1971
  * License:           GPL version 3 or any later version
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
- * Text Domain:       __TRIBE_DOMAIN__
+ * Text Domain:       tec-labs-remove-past-events-plus
  *
  *     This plugin is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -53,7 +53,7 @@ function tribe_extension_remove_past_events_plus() {
 	if ( ! class_exists( '\Tribe\Extensions\Remove_Past_Events_Plus\Plugin' ) ) {
 		tribe_transient_notice(
 			'remove-past-events-plus',
-			'<p>' . esc_html__( 'Couldn\'t properly load "The Events Calendar Extension: Remove Past Events Plus" the extension was deactivated.', '__TRIBE_DOMAIN__' ) . '</p>',
+			'<p>' . esc_html__( 'Couldn\'t properly load "The Events Calendar Extension: Remove Past Events Plus" the extension was deactivated.', 'tec-labs-remove-past-events-plus' ) . '</p>',
 			[],
 			// 1 second after that make sure the transient is removed.
 			1

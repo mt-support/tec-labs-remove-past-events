@@ -150,7 +150,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	 * TODO: Remove if not using settings
 	 */
 	private function get_options_prefix() {
-		return (string) str_replace( '-', '_', 'tribe-ext-remove-past-events-plus' );
+		return (string) str_replace( '-', '_', 'tec-labs-remove-past-events-plus' );
 	}
 
 	/**
