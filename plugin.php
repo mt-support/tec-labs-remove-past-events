@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name:       The Events Calendar Extension: Remove Past Events
- * Plugin URI:        
+ * Plugin URI:        https://theeventscalendar.com/extensions/remove-past-events
  * GitHub Plugin URI: https://github.com/mt-support/tec-labs-remove-past-events
- * Description:       More times to remove past events.
+ * Description:       Additional frequencies to remove past events.
  * Version:           1.0.0
  * Author:            The Events Calendar
  * Author URI:        https://evnt.is/1971
