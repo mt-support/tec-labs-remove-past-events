@@ -4,10 +4,10 @@
  *
  * @since 1.0.0
  *
- * @package Tribe\Extensions\Remove_Past_Events_Plus
+ * @package Tribe\Extensions\Remove_Past_Events
  */
 
-namespace Tribe\Extensions\Remove_Past_Events_Plus;
+namespace Tribe\Extensions\Remove_Past_Events;
 
 use Tribe__Abstract_Plugin_Register as Abstract_Plugin_Register;
 
@@ -16,7 +16,7 @@ use Tribe__Abstract_Plugin_Register as Abstract_Plugin_Register;
  *
  * @since 1.0.0
  *
- * @package Tribe\Extensions\Remove_Past_Events_Plus
+ * @package Tribe\Extensions\Remove_Past_Events
  *
  * @see Tribe__Abstract_Plugin_Register For the plugin dependency manifest registration.
  */

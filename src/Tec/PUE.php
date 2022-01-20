@@ -4,10 +4,10 @@
  *
  * @since 1.0.0
  *
- * @package Tribe\Extensions\Remove_Past_Events_Plus;
+ * @package Tribe\Extensions\Remove_Past_Events;
  */
 
-namespace Tribe\Extensions\Remove_Past_Events_Plus;
+namespace Tribe\Extensions\Remove_Past_Events;
 
 use Tribe__PUE__Checker;
 
@@ -16,7 +16,7 @@ use Tribe__PUE__Checker;
  *
  * @since 1.0.0
  *
- * @package Tribe\Extensions\Remove_Past_Events_Plus;
+ * @package Tribe\Extensions\Remove_Past_Events;
  */
 class PUE extends \tad_DI52_ServiceProvider {
 
@@ -27,7 +27,7 @@ class PUE extends \tad_DI52_ServiceProvider {
 	 *
 	 * @var string
 	 */
-	private static $pue_slug = 'extension-remove-past-events-plus';
+	private static $pue_slug = 'extension-remove-past-events';
 
 	/**
 	 * Whether to load PUE or not.
@@ -63,7 +63,7 @@ class PUE extends \tad_DI52_ServiceProvider {
 	 */
 	public function register() {
 		$this->container->singleton( static::class, $this );
-		$this->container->singleton( 'extension.remove_past_events_plus.pue', $this );
+		$this->container->singleton( 'extension.remove_past_events.pue', $this );
 
 		// Bail to avoid notice.
 		if ( ! static:: $is_active ) {
