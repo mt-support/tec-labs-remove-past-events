@@ -10,17 +10,17 @@
  *
  * @since 1.0.0
  *
- * @package Tribe\Extensions\Remove_Past_Events_Plus
+ * @package Tribe\Extensions\Remove_Past_Events
  */
 
-namespace Tribe\Extensions\Remove_Past_Events_Plus;
+namespace Tribe\Extensions\Remove_Past_Events;
 
 /**
  * Register Assets.
  *
  * @since 1.0.0
  *
- * @package Tribe\Extensions\Remove_Past_Events_Plus
+ * @package Tribe\Extensions\Remove_Past_Events
  */
 class Assets extends \tad_DI52_ServiceProvider {
 	/**
@@ -30,7 +30,7 @@ class Assets extends \tad_DI52_ServiceProvider {
 	 */
 	public function register() {
 		$this->container->singleton( static::class, $this );
-		$this->container->singleton( 'extension.remove_past_events_plus.assets', $this );
+		$this->container->singleton( 'extension.remove_past_events.assets', $this );
 
 		$plugin = tribe( Plugin::class );
 

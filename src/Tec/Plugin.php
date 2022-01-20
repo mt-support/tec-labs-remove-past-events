@@ -4,17 +4,17 @@
  *
  * @since 1.0.0
  *
- * @package Tribe\Extensions\Remove_Past_Events_Plus
+ * @package Tribe\Extensions\Remove_Past_Events
  */
 
-namespace Tribe\Extensions\Remove_Past_Events_Plus;
+namespace Tribe\Extensions\Remove_Past_Events;
 
 /**
  * Class Plugin
  *
  * @since 1.0.0
  *
- * @package Tribe\Extensions\Remove_Past_Events_Plus
+ * @package Tribe\Extensions\Remove_Past_Events
  */
 class Plugin extends \tad_DI52_ServiceProvider {
 	/**
@@ -33,7 +33,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	 *
 	 * @var string
 	 */
-	const SLUG = 'remove-past-events-plus';
+	const SLUG = 'remove-past-events';
 
 	/**
 	 * Stores the base slug for the extension.
@@ -42,7 +42,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	 *
 	 * @var string
 	 */
-	const FILE = TRIBE_EXTENSION_REMOVE_PAST_EVENTS_PLUS_FILE;
+	const FILE = TRIBE_EXTENSION_REMOVE_PAST_EVENTS_FILE;
 
 	/**
 	 * @since 1.0.0
@@ -80,8 +80,8 @@ class Plugin extends \tad_DI52_ServiceProvider {
 
 		// Register this provider as the main one and use a bunch of aliases.
 		$this->container->singleton( static::class, $this );
-		$this->container->singleton( 'extension.remove_past_events_plus', $this );
-		$this->container->singleton( 'extension.remove_past_events_plus.plugin', $this );
+		$this->container->singleton( 'extension.remove_past_events', $this );
+		$this->container->singleton( 'extension.remove_past_events.plugin', $this );
 		$this->container->register( PUE::class );
 
 		if ( ! $this->check_plugin_dependencies() ) {
@@ -124,7 +124,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		$plugin_register->register_plugin();
 
 		$this->container->singleton( Plugin_Register::class, $plugin_register );
-		$this->container->singleton( 'extension.remove_past_events_plus', $plugin_register );
+		$this->container->singleton( 'extension.remove_past_events', $plugin_register );
 	}
 
 	/**
@@ -173,7 +173,6 @@ AND t1.ID NOT IN ( $posts_with_parents_sql )
 	function option_filter( $fields ) {
 		$new_values                              = [
 			null    => esc_html__( 'Disabled', 'the-events-calendar' ),
-			1       => esc_html__( '1 minute', 'the-events-calendar' ),
 			15      => esc_html__( '15 minutes', 'the-events-calendar' ),
 			60      => esc_html__( '1 hour', 'the-events-calendar' ),
 			720     => esc_html__( '12 hours', 'the-events-calendar' ),
