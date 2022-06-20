@@ -24,7 +24,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.0.0';
+	const VERSION = '1.1.0';
 
 	/**
 	 * Stores the base slug for the plugin.
@@ -66,7 +66,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	public $plugin_url;
 
 	/**
-	 * Setup the Extension's properties.
+	 * Set up the Extension's properties.
 	 *
 	 * This always executes even if the required plugins are not present.
 	 *
@@ -137,6 +137,8 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	public function cleanup_query( $sql ) {
 		global $wpdb;
 
+		$event_post_type = 'tribe_events';
+
 		$posts_with_parents_sql = "
 SELECT DISTINCT post_parent
 FROM {$wpdb->posts}
@@ -205,7 +207,7 @@ AND t1.ID NOT IN ( $posts_with_parents_sql )
 	}
 
 	/**
-	 * Recheduling the crons handling the trashing and deleting.
+	 * Rescheduling the crons handling the trashing and deleting.
 	 *
 	 * @param string $cron The slug of the cron.
 	 *
