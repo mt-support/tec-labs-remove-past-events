@@ -137,6 +137,8 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	public function cleanup_query( $sql ) {
 		global $wpdb;
 
+		$event_post_type = 'tribe_events';
+
 		$posts_with_parents_sql = "
 SELECT DISTINCT post_parent
 FROM {$wpdb->posts}
