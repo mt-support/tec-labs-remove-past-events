@@ -92,6 +92,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		// Start binds.
 
 		add_filter( 'tribe_events_delete_old_events_sql', [ $this, 'cleanup_query' ] );
+		add_filter( 'tribe-event-general-settings-fields', [ $this, 'option_filter' ] );
 		add_filter( 'tribe_general_settings_tab_fields', [ $this, 'option_filter' ] );
 		add_action( 'plugins_loaded', [ $this, 'reschedule_crons' ], 99 );
 
