@@ -23,6 +23,8 @@ namespace Tribe\Extensions\Remove_Past_Events;
 
 use Tribe__Main as Common;
 
+use TEC\Common\Contracts\Service_Provider;
+
 /**
  * Class Hooks.
  *
@@ -30,7 +32,7 @@ use Tribe__Main as Common;
  *
  * @package Tribe\Extensions\Remove_Past_Events;
  */
-class Hooks extends \tad_DI52_ServiceProvider {
+class Hooks extends Service_Provider {
 
 	/**
 	 * Binds and sets up implementations.

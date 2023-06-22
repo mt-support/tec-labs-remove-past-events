@@ -15,6 +15,8 @@
 
 namespace Tribe\Extensions\Remove_Past_Events;
 
+use TEC\Common\Contracts\Service_Provider;
+
 /**
  * Register Assets.
  *
@@ -22,7 +24,7 @@ namespace Tribe\Extensions\Remove_Past_Events;
  *
  * @package Tribe\Extensions\Remove_Past_Events
  */
-class Assets extends \tad_DI52_ServiceProvider {
+class Assets extends Service_Provider {
 	/**
 	 * Binds and sets up implementations.
 	 *
