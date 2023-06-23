@@ -9,6 +9,8 @@
 
 namespace Tribe\Extensions\Remove_Past_Events;
 
+use TEC\Common\Contracts\Service_Provider;
+
 /**
  * Class Plugin
  *
@@ -16,7 +18,7 @@ namespace Tribe\Extensions\Remove_Past_Events;
  *
  * @package Tribe\Extensions\Remove_Past_Events
  */
-class Plugin extends \tad_DI52_ServiceProvider {
+class Plugin extends Service_Provider {
 	/**
 	 * Stores the version for the plugin.
 	 *

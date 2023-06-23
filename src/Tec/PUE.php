@@ -10,6 +10,7 @@
 namespace Tribe\Extensions\Remove_Past_Events;
 
 use Tribe__PUE__Checker;
+use TEC\Common\Contracts\Service_Provider;
 
 /**
  * Class PUE.
@@ -18,7 +19,7 @@ use Tribe__PUE__Checker;
  *
  * @package Tribe\Extensions\Remove_Past_Events;
  */
-class PUE extends \tad_DI52_ServiceProvider {
+class PUE extends Service_Provider {
 
 	/**
 	 * The slug used for PUE.
