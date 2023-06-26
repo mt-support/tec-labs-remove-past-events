@@ -32,6 +32,10 @@ We're always interested in your feedback and our [Help Desk](https://support.the
 
 == Changelog ==
 
+= [1.2.0] 2023-06-23 =
+
+* Fix - Update to use the new Service_Provider contract in common.
+
 = [1.1.1] 2023-01-22 =
 
 * Fix - Added a filter call to make the extension work with TEC 6.0.5 and above.
