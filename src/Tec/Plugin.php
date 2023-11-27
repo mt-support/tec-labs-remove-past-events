@@ -26,7 +26,7 @@ class Plugin extends Service_Provider {
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.2.0';
+	const VERSION = '1.2.1';
 
 	/**
 	 * Stores the base slug for the plugin.
@@ -128,7 +128,7 @@ class Plugin extends Service_Provider {
 	/**
 	 * Adjusting the dropdown options for trashing and deleting past events.
 	 *
-	 * @since TBD Changing option values to a 'frequency|interval' format.
+	 * @since 1.2.1 Changing option values to a 'frequency|interval' format.
 	 *
 	 * @param array<string,string>   $fields The array of option values.
 	 *
