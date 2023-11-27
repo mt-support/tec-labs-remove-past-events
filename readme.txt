@@ -32,6 +32,10 @@ We're always interested in your feedback and our [Help Desk](https://support.the
 
 == Changelog ==
 
+= [TBD] TBD =
+
+* Fix - Added compatibility to The Events Calendar 6.0 data structure. [ECP-1604]
+
 = [1.2.0] 2023-06-23 =
 
 * Fix - Update to use the new Service_Provider contract in common.

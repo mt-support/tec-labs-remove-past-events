@@ -91,14 +91,9 @@ class Plugin extends Service_Provider {
 			return;
 		}
 
-		// Start binds.
-
-		add_filter( 'tribe_events_delete_old_events_sql', [ $this, 'cleanup_query' ] );
 		add_filter( 'tribe-event-general-settings-fields', [ $this, 'option_filter' ] );
 		add_filter( 'tribe_general_settings_tab_fields', [ $this, 'option_filter' ] );
 		add_action( 'plugins_loaded', [ $this, 'reschedule_crons' ], 99 );
-
-		// End binds.
 
 		$this->container->register( Hooks::class );
 		$this->container->register( Assets::class );
@@ -131,67 +126,31 @@ class Plugin extends Service_Provider {
 	}
 
 	/**
-	 * Adjusting the cleanup query to use minutes instead of months
-	 *
-	 * @param string $sql The cleanup query in SQL format.
-	 *
-	 * @return string     The modified cleanup query in SQL format.
-	 */
-	public function cleanup_query( $sql ) {
-		global $wpdb;
-
-		$event_post_type = 'tribe_events';
-
-		$posts_with_parents_sql = "
-SELECT DISTINCT post_parent
-FROM {$wpdb->posts}
-WHERE
-post_type= '$event_post_type'
-AND post_parent <> 0
-";
-
-		$sql = "
-SELECT post_id
-FROM {$wpdb->posts} AS t1
-INNER JOIN {$wpdb->postmeta} AS t2 ON t1.ID = t2.post_id
-WHERE
-t1.post_type = %s
-AND t2.meta_key = '_EventEndDate'
-AND t2.meta_value <= DATE_SUB( CURRENT_TIMESTAMP(), INTERVAL %d MINUTE )
-AND t2.meta_value != 0
-AND t2.meta_value != ''
-AND t2.meta_value IS NOT NULL
-AND t1.post_parent = 0
-AND t1.ID NOT IN ( $posts_with_parents_sql )
-";
-
-		return $sql;
-	}
-
-	/**
 	 * Adjusting the dropdown options for trashing and deleting past events.
 	 *
-	 * @param array   $fields The array of option values.
+	 * @since TBD Changing option values to a 'frequency|interval' format.
+	 *
+	 * @param array<string,string>   $fields The array of option values.
 	 *
 	 * @return array  The modified option values.
 	 */
 	function option_filter( $fields ) {
 		$new_values                              = [
-			null    => esc_html__( 'Disabled', 'the-events-calendar' ),
-			15      => esc_html__( '15 minutes', 'the-events-calendar' ),
-			60      => esc_html__( '1 hour', 'the-events-calendar' ),
-			720     => esc_html__( '12 hours', 'the-events-calendar' ),
-			1440    => esc_html__( '1 day', 'the-events-calendar' ),
-			4320    => esc_html__( '3 days', 'the-events-calendar' ),
-			10080   => esc_html__( '1 week', 'the-events-calendar' ),
-			20160   => esc_html__( '2 weeks', 'the-events-calendar' ),
-			43200   => esc_html__( '1 month', 'the-events-calendar' ),
-			129600  => esc_html__( '3 months', 'the-events-calendar' ),
-			259200  => esc_html__( '6 months', 'the-events-calendar' ),
-			388800  => esc_html__( '9 months', 'the-events-calendar' ),
-			525600  => esc_html__( '1 year', 'the-events-calendar' ),
-			1051200 => esc_html__( '2 years', 'the-events-calendar' ),
-			1576800 => esc_html__( '3 years', 'the-events-calendar' ),
+			null        => esc_html__( 'Disabled', 'the-events-calendar' ),
+			'15|minute' => esc_html__( '15 minutes', 'the-events-calendar' ),
+			'1|hour'    => esc_html__( '1 hour', 'the-events-calendar' ),
+			'12|hours'  => esc_html__( '12 hours', 'the-events-calendar' ),
+			'1|day'     => esc_html__( '1 day', 'the-events-calendar' ),
+			'3|day'     => esc_html__( '3 days', 'the-events-calendar' ),
+			'1|week'    => esc_html__( '1 week', 'the-events-calendar' ),
+			'2|week'    => esc_html__( '2 weeks', 'the-events-calendar' ),
+			'1|month'   => esc_html__( '1 month', 'the-events-calendar' ),
+			'3|month'   => esc_html__( '3 months', 'the-events-calendar' ),
+			'6|month'   => esc_html__( '6 months', 'the-events-calendar' ),
+			'9|month'   => esc_html__( '9 months', 'the-events-calendar' ),
+			'1|year'    => esc_html__( '1 year', 'the-events-calendar' ),
+			'2|year'    => esc_html__( '2 years', 'the-events-calendar' ),
+			'3|year'    => esc_html__( '3 years', 'the-events-calendar' ),
 		];
 		$fields['delete-past-events']['options'] = $new_values;
 		$fields['trash-past-events']['options']  = $new_values;
