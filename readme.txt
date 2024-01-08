@@ -32,7 +32,7 @@ We're always interested in your feedback and our [Help Desk](https://support.the
 
 == Changelog ==
 
-= [TBD] TBD =
+= [1.2.1] 2023-12-11 =
 
 * Fix - Added compatibility to The Events Calendar 6.0 data structure. [ECP-1604]
 
