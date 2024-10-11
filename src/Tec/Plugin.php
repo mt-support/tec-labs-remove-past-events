@@ -26,7 +26,7 @@ class Plugin extends Service_Provider {
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.2.1';
+	const VERSION = '1.2.2';
 
 	/**
 	 * Stores the base slug for the plugin.
@@ -129,7 +129,7 @@ class Plugin extends Service_Provider {
 	 * Adjusting the dropdown options for trashing and deleting past events.
 	 *
 	 * @since 1.2.1 Changing option values to a 'frequency|interval' format.
-	 * @since 1.3.0 Adjusting option values to keep the default values compatible.
+	 * @since 1.2.2 Adjusting option values to keep the default values compatible.
 	 *              After enabling the extension, the setting dropdown will keep the current setting instead of
 	 *              reverting to 'Disabled' while the saved setting would still be something else due to the
 	 *              different option value (e.g. "9" vs. "9|month").
@@ -165,7 +165,7 @@ class Plugin extends Service_Provider {
 	/**
 	 * Rescheduling the crons handling the trashing and deleting.
 	 *
-	 * @since 1.3.0 Adjust cron frequency calculation.
+	 * @since 1.2.2 Adjust cron frequency calculation.
 	 *              Remove $cron parameter.
 	 *
 	 * @return string The frequency string how often the cron should run.
