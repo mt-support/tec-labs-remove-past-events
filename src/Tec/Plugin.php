@@ -198,18 +198,21 @@ class Plugin extends Service_Provider {
 		 * - fifteendays
 		 * - monthly
 		 */
+		$frequency_struct = explode( '|', $time );
+		$feq              = $frequency_struct[0];
+		$interval         = $frequency_struct[1] ?? 'month';
 
-		// For 1 minute and 15 minutes
-		if ( $time < 60 ) {
+		// For 15 minutes (and other minutes)
+		if ( str_starts_with( $interval, 'minute' ) ) {
 			$frequency = 'tribe-every15mins';
 		}
-		// For 1 hour and 12 hours
-		elseif ( $time < 1440 ) {
+		// For 1 hour and 12 hours (and other hours)
+		elseif ( str_starts_with( $interval, 'hour' ) ) {
 			$frequency = 'hourly';
 		}
 		// For 1 day and longer
 		else {
-			$frequency = 'daily';
+			$frequency = 'twicedaily';
 		}
 
 		$scheduled = wp_next_scheduled( $cron );
