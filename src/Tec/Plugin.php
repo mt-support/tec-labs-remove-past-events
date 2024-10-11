@@ -91,8 +91,9 @@ class Plugin extends Service_Provider {
 			return;
 		}
 
-		add_filter( 'tribe-event-general-settings-fields', [ $this, 'option_filter' ] );
-		add_filter( 'tribe_general_settings_tab_fields', [ $this, 'option_filter' ] );
+		//add_filter( 'tribe-event-general-settings-fields', [ $this, 'option_filter' ] );
+		//add_filter( 'tribe_general_settings_tab_fields', [ $this, 'option_filter' ] );
+		add_filter( 'tribe_general_settings_maintenance_section', [ $this, 'option_filter' ] );
 		add_action( 'plugins_loaded', [ $this, 'reschedule_crons' ], 99 );
 
 		$this->container->register( Hooks::class );
