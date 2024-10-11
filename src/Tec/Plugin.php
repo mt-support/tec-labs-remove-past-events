@@ -130,13 +130,17 @@ class Plugin extends Service_Provider {
 	 * Adjusting the dropdown options for trashing and deleting past events.
 	 *
 	 * @since 1.2.1 Changing option values to a 'frequency|interval' format.
+	 * @since 1.3.0 Adjusting option values to keep the default values compatible.
+	 *              After enabling the extension, the setting dropdown will keep the current setting instead of
+	 *              reverting to 'Disabled' while the saved setting would still be something else due to the
+	 *              different option value (e.g. "9" vs. "9|month").
 	 *
 	 * @param array<string,string>   $fields The array of option values.
 	 *
 	 * @return array  The modified option values.
 	 */
 	function option_filter( $fields ) {
-		$new_values                              = [
+		$new_values = [
 			null        => esc_html__( 'Disabled', 'the-events-calendar' ),
 			'15|minute' => esc_html__( '15 minutes', 'the-events-calendar' ),
 			'1|hour'    => esc_html__( '1 hour', 'the-events-calendar' ),
@@ -145,13 +149,13 @@ class Plugin extends Service_Provider {
 			'3|day'     => esc_html__( '3 days', 'the-events-calendar' ),
 			'1|week'    => esc_html__( '1 week', 'the-events-calendar' ),
 			'2|week'    => esc_html__( '2 weeks', 'the-events-calendar' ),
-			'1|month'   => esc_html__( '1 month', 'the-events-calendar' ),
-			'3|month'   => esc_html__( '3 months', 'the-events-calendar' ),
-			'6|month'   => esc_html__( '6 months', 'the-events-calendar' ),
-			'9|month'   => esc_html__( '9 months', 'the-events-calendar' ),
-			'1|year'    => esc_html__( '1 year', 'the-events-calendar' ),
-			'2|year'    => esc_html__( '2 years', 'the-events-calendar' ),
-			'3|year'    => esc_html__( '3 years', 'the-events-calendar' ),
+			'1'         => esc_html__( '1 month', 'the-events-calendar' ),
+			'3'         => esc_html__( '3 months', 'the-events-calendar' ),
+			'6'         => esc_html__( '6 months', 'the-events-calendar' ),
+			'9'         => esc_html__( '9 months', 'the-events-calendar' ),
+			'12'        => esc_html__( '1 year', 'the-events-calendar' ),
+			'24'        => esc_html__( '2 years', 'the-events-calendar' ),
+			'36'        => esc_html__( '3 years', 'the-events-calendar' ),
 		];
 		$fields['delete-past-events']['options'] = $new_values;
 		$fields['trash-past-events']['options']  = $new_values;
