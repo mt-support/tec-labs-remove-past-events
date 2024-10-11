@@ -94,7 +94,8 @@ class Plugin extends Service_Provider {
 		//add_filter( 'tribe-event-general-settings-fields', [ $this, 'option_filter' ] );
 		//add_filter( 'tribe_general_settings_tab_fields', [ $this, 'option_filter' ] );
 		add_filter( 'tribe_general_settings_maintenance_section', [ $this, 'option_filter' ] );
-		add_action( 'plugins_loaded', [ $this, 'reschedule_crons' ], 99 );
+		//add_action( 'plugins_loaded', [ $this, 'reschedule_crons' ], 99 );
+		add_filter( 'tec_events_event_cleaner_trash_cron_frequency', [ $this, 'reschedule_crons' ] );
 
 		$this->container->register( Hooks::class );
 		$this->container->register( Assets::class );
@@ -168,7 +169,7 @@ class Plugin extends Service_Provider {
 	 *
 	 * @return void
 	 */
-	function reschedule_crons() {
+	function reschedule_crons_old() {
 		$this->reschedule_trash_or_del_event_cron( 'tribe_trash_event_cron' );
 		$this->reschedule_trash_or_del_event_cron( 'tribe_del_event_cron' );
 	}
@@ -176,16 +177,19 @@ class Plugin extends Service_Provider {
 	/**
 	 * Rescheduling the crons handling the trashing and deleting.
 	 *
-	 * @param string $cron The slug of the cron.
+	 * @since 1.3.0 Adjust cron frequency calculation.
+	 *              Remove $cron parameter.
 	 *
-	 * @return void
+	 * @return string The frequency string how often the cron should run.
 	 */
-	function reschedule_trash_or_del_event_cron( $cron ) {
-		if ( 'tribe_trash_event_cron' == $cron ) {
+	function reschedule_crons() {
+/*		if ( 'tribe_trash_event_cron' == $cron ) {
 			$time = tribe_get_option( 'trash-past-events', 43200 );
 		} else {
 			$time = tribe_get_option( 'delete-past-events', 43200 );
-		}
+		}*/
+		// Get the setting, default to 1 month.
+		$time = tribe_get_option( 'trash-past-events', 1 );
 		/**
 		 * The frequency we want to run the cron on.
 		 *
@@ -204,22 +208,14 @@ class Plugin extends Service_Provider {
 
 		// For 15 minutes (and other minutes)
 		if ( str_starts_with( $interval, 'minute' ) ) {
-			$frequency = 'tribe-every15mins';
+			return 'tribe-every15mins';
 		}
 		// For 1 hour and 12 hours (and other hours)
 		elseif ( str_starts_with( $interval, 'hour' ) ) {
-			$frequency = 'hourly';
+			return 'hourly';
 		}
+
 		// For 1 day and longer
-		else {
-			$frequency = 'twicedaily';
-		}
-
-		$scheduled = wp_next_scheduled( $cron );
-
-		if ( $scheduled && $frequency !== wp_get_schedule( $cron ) ) {
-			wp_unschedule_event( $scheduled, $cron );
-			wp_schedule_event( time(), $frequency, $cron );
-		}
+		return 'twicedaily';
 	}
 }
