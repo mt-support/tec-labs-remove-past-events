@@ -17,7 +17,7 @@ than' settings, which can be found under `Events > Settings > General tab`.
 Install and activate like any other plugin!
 
 * You can upload the plugin zip file via the *Plugins ‣ Add New* screen
-* You can unzip the plugin and then upload to your plugin directory (typically _wp-content/plugins_) via FTP
+* You can unzip the plugin and then upload it to your plugin directory (typically _wp-content/plugins_) via FTP
 * Once it has been installed or uploaded, simply visit the main plugin list and activate it
 
 == Frequently Asked Questions ==
@@ -28,13 +28,14 @@ Please visit our [extension library](https://theeventscalendar.com/extensions/) 
 
 = What if I experience problems? =
 
-We're always interested in your feedback and our [Help Desk](https://support.theeventscalendar.com/) are the best place to flag any issues. Do note, however, that the degree of support we provide for extensions like this one tends to be very limited.
+We're always interested in your feedback and our [Help Desk](https://support.theeventscalendar.com/) is the best place to flag any issues. Do note, however, that the degree of support we provide for extensions like this one tends to be very limited.
 
 == Changelog ==
 
 = [1.2.2] 2024-10-11 =
 
-* Fix - Added compatibility for the new admin UI. [TECEXT-335]
+* Fix - Add compatibility for the new admin UI. [TECEXT-335]
+* Feature - Make the extension translatable.
 
 = [1.2.1] 2023-12-11 =
 
