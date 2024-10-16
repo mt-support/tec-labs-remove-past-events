@@ -143,7 +143,7 @@ class Plugin extends Service_Provider {
 			null        => esc_html__( 'Disabled', 'the-events-calendar' ),
 			'15|minute' => esc_html__( '15 minutes', 'the-events-calendar' ),
 			'1|hour'    => esc_html__( '1 hour', 'the-events-calendar' ),
-			'12|hours'  => esc_html__( '12 hours', 'the-events-calendar' ),
+			'12|hour'   => esc_html__( '12 hours', 'the-events-calendar' ),
 			'1|day'     => esc_html__( '1 day', 'the-events-calendar' ),
 			'3|day'     => esc_html__( '3 days', 'the-events-calendar' ),
 			'1|week'    => esc_html__( '1 week', 'the-events-calendar' ),
