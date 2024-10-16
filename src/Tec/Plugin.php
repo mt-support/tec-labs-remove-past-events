@@ -156,7 +156,7 @@ class Plugin extends Service_Provider {
 			'24'        => esc_html__( '2 years', 'the-events-calendar' ),
 			'36'        => esc_html__( '3 years', 'the-events-calendar' ),
 		];
-		$fields['delete-past-events']['options'] = $new_values;
+
 		$fields['trash-past-events']['options']  = $new_values;
 
 		return $fields;
