@@ -4,7 +4,7 @@
  * Plugin URI:        https://theeventscalendar.com/extensions/remove-past-events
  * GitHub Plugin URI: https://github.com/mt-support/tec-labs-remove-past-events
  * Description:       Additional frequencies to remove past events.
- * Version:           1.2.1
+ * Version:           1.2.2
  * Author:            The Events Calendar
  * Author URI:        https://evnt.is/1971
  * License:           GPL version 3 or any later version

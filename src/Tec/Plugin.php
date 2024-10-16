@@ -26,7 +26,7 @@ class Plugin extends Service_Provider {
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.2.1';
+	const VERSION = '1.2.2';
 
 	/**
 	 * Stores the base slug for the plugin.
@@ -91,9 +91,9 @@ class Plugin extends Service_Provider {
 			return;
 		}
 
-		add_filter( 'tribe-event-general-settings-fields', [ $this, 'option_filter' ] );
-		add_filter( 'tribe_general_settings_tab_fields', [ $this, 'option_filter' ] );
-		add_action( 'plugins_loaded', [ $this, 'reschedule_crons' ], 99 );
+		add_filter( 'tribe_general_settings_maintenance_section', [ $this, 'option_filter' ] );
+
+		add_filter( 'tec_events_event_cleaner_trash_cron_frequency', [ $this, 'reschedule_crons' ] );
 
 		$this->container->register( Hooks::class );
 		$this->container->register( Assets::class );
@@ -129,58 +129,51 @@ class Plugin extends Service_Provider {
 	 * Adjusting the dropdown options for trashing and deleting past events.
 	 *
 	 * @since 1.2.1 Changing option values to a 'frequency|interval' format.
+	 * @since 1.2.2 Adjusting option values to keep the default values compatible.
+	 *              After enabling the extension, the setting dropdown will keep the current setting instead of
+	 *              reverting to 'Disabled' while the saved setting would still be something else due to the
+	 *              different option value (e.g. "9" vs. "9|month").
 	 *
 	 * @param array<string,string>   $fields The array of option values.
 	 *
 	 * @return array  The modified option values.
 	 */
 	function option_filter( $fields ) {
-		$new_values                              = [
+		$new_values = [
 			null        => esc_html__( 'Disabled', 'the-events-calendar' ),
-			'15|minute' => esc_html__( '15 minutes', 'the-events-calendar' ),
-			'1|hour'    => esc_html__( '1 hour', 'the-events-calendar' ),
-			'12|hours'  => esc_html__( '12 hours', 'the-events-calendar' ),
-			'1|day'     => esc_html__( '1 day', 'the-events-calendar' ),
-			'3|day'     => esc_html__( '3 days', 'the-events-calendar' ),
-			'1|week'    => esc_html__( '1 week', 'the-events-calendar' ),
-			'2|week'    => esc_html__( '2 weeks', 'the-events-calendar' ),
-			'1|month'   => esc_html__( '1 month', 'the-events-calendar' ),
-			'3|month'   => esc_html__( '3 months', 'the-events-calendar' ),
-			'6|month'   => esc_html__( '6 months', 'the-events-calendar' ),
-			'9|month'   => esc_html__( '9 months', 'the-events-calendar' ),
-			'1|year'    => esc_html__( '1 year', 'the-events-calendar' ),
-			'2|year'    => esc_html__( '2 years', 'the-events-calendar' ),
-			'3|year'    => esc_html__( '3 years', 'the-events-calendar' ),
+			'15|minute' => esc_html__( '15 minutes', 'tec-labs-remove-past-events' ),
+			'1|hour'    => esc_html__( '1 hour', 'tec-labs-remove-past-events' ),
+			'12|hour'   => esc_html__( '12 hours', 'tec-labs-remove-past-events' ),
+			'1|day'     => esc_html__( '1 day', 'tec-labs-remove-past-events' ),
+			'3|day'     => esc_html__( '3 days', 'tec-labs-remove-past-events' ),
+			'1|week'    => esc_html__( '1 week', 'tec-labs-remove-past-events' ),
+			'2|week'    => esc_html__( '2 weeks', 'tec-labs-remove-past-events' ),
+			'1'         => esc_html__( '1 month', 'the-events-calendar' ),
+			'3'         => esc_html__( '3 months', 'the-events-calendar' ),
+			'6'         => esc_html__( '6 months', 'the-events-calendar' ),
+			'9'         => esc_html__( '9 months', 'the-events-calendar' ),
+			'12'        => esc_html__( '1 year', 'the-events-calendar' ),
+			'24'        => esc_html__( '2 years', 'the-events-calendar' ),
+			'36'        => esc_html__( '3 years', 'the-events-calendar' ),
 		];
-		$fields['delete-past-events']['options'] = $new_values;
+
 		$fields['trash-past-events']['options']  = $new_values;
 
 		return $fields;
 	}
 
 	/**
-	 * Triggering the rescheduling of crons
-	 *
-	 * @return void
-	 */
-	function reschedule_crons() {
-		$this->reschedule_trash_or_del_event_cron( 'tribe_trash_event_cron' );
-		$this->reschedule_trash_or_del_event_cron( 'tribe_del_event_cron' );
-	}
-
-	/**
 	 * Rescheduling the crons handling the trashing and deleting.
 	 *
-	 * @param string $cron The slug of the cron.
+	 * @since 1.2.2 Adjust cron frequency calculation.
+	 *              Remove $cron parameter.
 	 *
-	 * @return void
+	 * @return string The frequency string how often the cron should run.
 	 */
-	function reschedule_trash_or_del_event_cron( $cron ) {
-		if ( 'tribe_trash_event_cron' == $cron ) {
-			$time = tribe_get_option( 'trash-past-events', 43200 );
-		} else {
-			$time = tribe_get_option( 'delete-past-events', 43200 );
-		}
+	function reschedule_crons() {
+		// Get the setting, default to 1 month.
+		$time = tribe_get_option( 'trash-past-events', 1 );
+
 		/**
 		 * The frequency we want to run the cron on.
 		 *
@@ -193,25 +186,20 @@ class Plugin extends Service_Provider {
 		 * - fifteendays
 		 * - monthly
 		 */
+		$frequency_struct = explode( '|', $time );
+		$feq              = $frequency_struct[0];
+		$interval         = $frequency_struct[1] ?? 'month';
 
-		// For 1 minute and 15 minutes
-		if ( $time < 60 ) {
-			$frequency = 'tribe-every15mins';
+		// For 15 minutes (and other minutes)
+		if ( str_starts_with( $interval, 'minute' ) ) {
+			return 'tribe-every15mins';
 		}
-		// For 1 hour and 12 hours
-		elseif ( $time < 1440 ) {
-			$frequency = 'hourly';
+		// For 1 hour and 12 hours (and other hours)
+		elseif ( str_starts_with( $interval, 'hour' ) ) {
+			return 'hourly';
 		}
+
 		// For 1 day and longer
-		else {
-			$frequency = 'daily';
-		}
-
-		$scheduled = wp_next_scheduled( $cron );
-
-		if ( $scheduled && $frequency !== wp_get_schedule( $cron ) ) {
-			wp_unschedule_event( $scheduled, $cron );
-			wp_schedule_event( time(), $frequency, $cron );
-		}
+		return 'twicedaily';
 	}
 }

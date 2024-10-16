@@ -1,0 +1,67 @@
+# Copyright (C) 2024 The Events Calendar
+# This file is distributed under the GPL version 3 or any later version.
+msgid ""
+msgstr ""
+"Project-Id-Version: The Events Calendar Extension: Remove Past Events 1.2.2\n"
+"Report-Msgid-Bugs-To: The Events Calendar <https://support.theeventscalendar.com/>\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-10-16T14:56:04+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.9.0\n"
+"X-Domain: tec-labs-remove-past-events\n"
+
+#. Plugin Name of the plugin
+msgid "The Events Calendar Extension: Remove Past Events"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://theeventscalendar.com/extensions/remove-past-events"
+msgstr ""
+
+#. Description of the plugin
+msgid "Additional frequencies to remove past events."
+msgstr ""
+
+#. Author of the plugin
+msgid "The Events Calendar"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://evnt.is/1971"
+msgstr ""
+
+#: plugin.php:56
+msgid "Couldn't properly load \"The Events Calendar Extension: Remove Past Events\" the extension was deactivated."
+msgstr ""
+
+#: src/Tec/Plugin.php:144
+msgid "15 minutes"
+msgstr ""
+
+#: src/Tec/Plugin.php:145
+msgid "1 hour"
+msgstr ""
+
+#: src/Tec/Plugin.php:146
+msgid "12 hours"
+msgstr ""
+
+#: src/Tec/Plugin.php:147
+msgid "1 day"
+msgstr ""
+
+#: src/Tec/Plugin.php:148
+msgid "3 days"
+msgstr ""
+
+#: src/Tec/Plugin.php:149
+msgid "1 week"
+msgstr ""
+
+#: src/Tec/Plugin.php:150
+msgid "2 weeks"
+msgstr ""
